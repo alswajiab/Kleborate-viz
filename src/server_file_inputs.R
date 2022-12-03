@@ -120,12 +120,21 @@ kleborate_summaries <- function(d) {
     mutate(Omp_mutations_simplified = str_replace_all(Omp_mutations, "-[0-9]+%", "-trunc"), Omp_simple = if_else(Omp_mutations == "-", "wt", "mut")) %>%
     # simplify carbapenemases and combine with omp
     mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "[A-Z]+"), "other", "-")) %>%
-    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "IMP"), "IMP", Bla_Carb_simplified)) %>%
-    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "KPC"), "KPC", Bla_Carb_simplified)) %>%
-    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "OXA"), "OXA", Bla_Carb_simplified)) %>%
-    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "NDM"), "NDM", Bla_Carb_simplified)) %>%
-    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "VIM"), "VIM", Bla_Carb_simplified)) %>%
     mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, ";"), "multiple", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "IMP"), "IMP", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "KPC-2;NDM-1"), "KPC-2_NDM-1", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "NDM-1;OXA-48"), "NDM-1_OXA-48", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "NDM-1;OXA-232"), "NDM-1_OXA-232", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "NDM-5;OXA-48"), "NDM-5_OXA-48", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "NDM-5;OXA-232"), "NDM-5_OXA-232", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "NDM-5;OXA-181"), "NDM-5_OXA-181", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "NDM-1"), "NDM-1", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "NDM-5"), "NDM-5", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "OXA-48"), "OXA-48", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "OXA-181"), "OXA-181", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "OXA-232"), "OXA-232", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "KPC-2"), "KPC-2", Bla_Carb_simplified)) %>%
+    mutate(Bla_Carb_simplified = if_else(str_detect(Bla_Carb_acquired, "VIM"), "VIM", Bla_Carb_simplified)) %>%
     mutate(carbapenemase_omp_combination = paste(Bla_Carb_simplified, Omp_simple, sep = " ")) %>%
     # simplify ESBLs and combine with omp
     mutate(Bla_ESBL_simplified = if_else(str_detect(Bla_ESBL_acquired, "[A-Z]+"), "other", "-")) %>%
